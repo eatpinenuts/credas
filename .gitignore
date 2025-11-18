@@ -1,0 +1,22 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio / Rider / VS Code junk
+.vscode/
+.idea/
+*.user
+*.rsuser
+*.suo
+*.cache
+*.pdb
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test results
+TestResult*/
