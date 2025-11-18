@@ -66,7 +66,7 @@ dotnet tool install --global name-sorter --add-source ./NameSorter.ConsoleApp/bi
 
 ---
 
-## ▶️ 3. Run the tool
+## ▶️ 3. Run the tool (global tool)
 
 After installation, execute from *any* folder:
 
@@ -81,7 +81,17 @@ This will:
 
 ---
 
-## 🧪 4. Unit Tests
+## ▶️ 4. Run the tool manually (without installing)
+
+If preferred, you can run the console application directly:
+
+```bash
+dotnet run --project NameSorter.ConsoleApp -- ./unsorted-names-list.txt
+```
+
+---
+
+## 🧪 5. Unit Tests
 
 Run tests:
 
