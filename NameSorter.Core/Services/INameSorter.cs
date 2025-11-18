@@ -1,5 +1,5 @@
-// <copyright file="INameSorter.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="INameSorter.cs">
+// © 2025 Billy Flatman. All rights reserved.
 // </copyright>
 
 namespace NameSorter.Core.Services;

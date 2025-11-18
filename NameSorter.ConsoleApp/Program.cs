@@ -1,5 +1,5 @@
-// <copyright file="Program.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="Program.cs">
+// © 2025 Billy Flatman. All rights reserved.
 // </copyright>
 
 using Microsoft.Extensions.DependencyInjection;
