@@ -1,6 +1,4 @@
-// <copyright file="PersonNameSorter.cs">
 // © 2025 Billy Flatman. All rights reserved.
-// </copyright>
 
 namespace NameSorter.Core.Services;
 

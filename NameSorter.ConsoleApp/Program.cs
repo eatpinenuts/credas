@@ -1,6 +1,4 @@
-﻿// <copyright file="Program.cs">
-// © 2025 Billy Flatman. All rights reserved.
-// </copyright>
+﻿// © 2025 Billy Flatman. All rights reserved.
 
 using Microsoft.Extensions.DependencyInjection;
 using NameSorter.Core.Services;
