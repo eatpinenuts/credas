@@ -1,6 +1,4 @@
-// <copyright file="INameSorter.cs">
 // © 2025 Billy Flatman. All rights reserved.
-// </copyright>
 
 namespace NameSorter.Core.Services;
 
