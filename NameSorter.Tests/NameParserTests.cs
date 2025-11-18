@@ -3,7 +3,7 @@ using NameSorter.Core.Services;
 public class NameParserTests
 {
     [Fact]
-    public void Parse_ValidName_ReturnsCorrectParts()
+    public void Parse_WhenNameIsValid_ReturnsCorrectGivenAndLastName()
     {
         // Arrange
         var parser = new PersonNameParser();
@@ -17,11 +17,22 @@ public class NameParserTests
     }
 
     [Fact]
-    public void Parse_InvalidName_Throws()
+    public void Parse_WhenNameIsInvalid_ThrowsArgumentException()
     {
         var parser = new PersonNameParser();
 
         // Names require at least a surname, so this should fail
         Assert.Throws<ArgumentException>(() => parser.Parse("SingleName"));
+    }
+
+    [Fact]
+    public void Parse_WhenThreeGivenNamesProvided_ParsesAllGivenNamesCorrectly()
+    {
+        var parser = new PersonNameParser();
+
+        var result = parser.Parse("Hunter Uriah Mathew Clarke");
+
+        Assert.Equal("Clarke", result.LastName);
+        Assert.Equal(new[] { "Hunter", "Uriah", "Mathew" }, result.GivenNames);
     }
 }

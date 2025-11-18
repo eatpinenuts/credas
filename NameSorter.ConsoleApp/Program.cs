@@ -36,20 +36,28 @@ internal class Program
         var sorter = provider.GetRequiredService<INameSorter>();
         var fileService = provider.GetRequiredService<IFileService>();
 
-        // Read and parse names from file
-        var lines = fileService.ReadLines(inputPath);
-        var people = lines.Select(parser.Parse).ToList();
-
-        // Sort using the dedicated sorter service
-        var sorted = sorter.Sort(people).ToList();
-
-        // Output to screen
-        foreach (var p in sorted)
+        try
         {
-            Console.WriteLine(p);
-        }
+            // Read and parse names from file
+            var lines = fileService.ReadLines(inputPath);
+            var people = lines.Select(parser.Parse).ToList();
 
-        // Write sorted results to the required output file
-        fileService.WriteLines(outputPath, sorted.Select(n => n.ToString()));
+            // Sort using the dedicated sorter service
+            var sorted = sorter.Sort(people).ToList();
+
+            // Output to screen
+            foreach (var p in sorted)
+            {
+                Console.WriteLine(p);
+            }
+
+            // Write sorted results to the required output file
+            fileService.WriteLines(outputPath, sorted.Select(n => n.ToString()));
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error processing file: {ex.Message}");
+            Environment.ExitCode = 1;
+        }
     }
 }
