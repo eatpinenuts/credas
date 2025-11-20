@@ -8,18 +8,22 @@ namespace NameSorter.Core.Services;
 public interface IFileService
 {
     /// <summary>
-    /// Reads all lines from the specified file path.
+    /// Asynchronously reads a file line-by-line using streaming I/O.
     /// </summary>
-    /// <param name="path">The file path to read from.</param>
+    /// <param name="path">The full path of the file to read.</param>
     /// <returns>
-    /// A sequence of lines read from the file.
+    /// An <see cref="IAsyncEnumerable{T}"/> that yields each line of the file
+    /// without loading the entire file into memory.
     /// </returns>
-    IEnumerable<string> ReadLines(string path);
+    IAsyncEnumerable<string> ReadLinesAsync(string path);
 
     /// <summary>
-    /// Writes the specified lines to the given file path, overwriting any existing file.
+    /// Asynchronously writes a sequence of lines to a file using streaming I/O.
     /// </summary>
-    /// <param name="path">The file path to write to.</param>
-    /// <param name="lines">The collection of lines to write to the file.</param>
-    void WriteLines(string path, IEnumerable<string> lines);
+    /// <param name="path">The full path of the output file to write.</param>
+    /// <param name="lines">
+    /// The asynchronous sequence of lines to write to the file.
+    /// </param>
+    /// <returns>A task that completes when all lines have been written.</returns>
+    Task WriteLinesAsync(string path, IAsyncEnumerable<string> lines);
 }

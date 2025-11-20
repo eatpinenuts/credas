@@ -1,6 +1,9 @@
 // © 2025 Billy Flatman. All rights reserved.
 
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using NameSorter.Core.Extensions;
+using NameSorter.Core.Models;
 using NameSorter.Core.Services;
 
 /// <summary>
@@ -8,7 +11,7 @@ using NameSorter.Core.Services;
 /// </summary>
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         // Require an input file path
         if (args.Length == 0)
@@ -36,11 +39,16 @@ internal class Program
 
         try
         {
-            // Read and parse names from file
-            var lines = fileService.ReadLines(inputPath);
-            var people = lines.Select(parser.Parse).ToList();
+            // Read + parse (streaming)
+            var people = new List<PersonName>();
 
-            // Sort using the dedicated sorter service
+            await foreach (var line in fileService.ReadLinesAsync(inputPath).ConfigureAwait(false))
+            {
+                var parsed = parser.Parse(line);
+                people.Add(parsed);
+            }
+
+            // Sort (sync is correct here)
             var sorted = sorter.Sort(people).ToList();
 
             // Output to screen
@@ -49,8 +57,10 @@ internal class Program
                 Console.WriteLine(p);
             }
 
-            // Write sorted results to the required output file
-            fileService.WriteLines(outputPath, sorted.Select(n => n.ToString()));
+            // Write sorted results to the required output file (streaming)
+            await fileService.WriteLinesAsync(
+                outputPath,
+                sorted.Select(n => n.ToString()).ToAsyncEnumerable()).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
